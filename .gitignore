@@ -1,0 +1,11 @@
+.settings/
+.classpath
+.project
+*.class
+wishlist.txt
+libs/android-support-v4.jar
+bin/dexedLibs/android-support-v4-0fb505774603c0c6ca285ee1605cd95d.jar
+bin/dexedLibs/android-support-v4-f1a187e3a3165d4dc07f7eb8be7b1293.jar
+bin/classes.dex
+bin/jarlist.cache
+bin/resources.ap_

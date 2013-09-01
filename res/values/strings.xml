@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Tomodoro</string>
+    <string name="pomo_description">Un tomate</string>
+    <string name="minutes_text_view">Minutos</string>
+    <string name="start_button">GO!</string>
+    <string name="stop_button">STOP</string>
+    <string name="back_button">BACK</string>
+    <string name="clicked">Empezando pomodoro</string>
+    <string name="chrono">Cronómetro</string>
+    <string name="greetings">¡Enhorabuena!</string>
+    <string name="finished">Tomodoro terminado</string>
+    
+</resources>

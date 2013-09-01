@@ -1,0 +1,79 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_centerHorizontal="true"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".ChronoActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/barrasup"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/titleChrono"
+            style="@style/noBackGround"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/app_name"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#000000"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/tomate"
+        style="@style/noBackGround"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="14dp"
+        android:contentDescription="@string/pomo_description"
+        android:src="@drawable/tomate" />
+    
+    <TextView
+        android:id="@+id/chronoTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/chrono"
+        android:textSize="40sp"
+        style="@style/shadowNoBackGround"
+        android:textColor="#d2d0d0"
+         />
+
+    <TextView
+        android:id="@+id/chronoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#95c121"
+        android:textSize="80sp"
+        style="@style/noBackGround"
+         />
+    
+    <Button
+        android:id="@+id/stopButton"
+        style="@style/shadow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/radiusbuttonred"
+        android:paddingBottom="8dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:text="@string/stop_button"
+        android:textColor="#f0bbb3"
+        android:textSize="40sp"
+        android:onClick="backToMain" />
+
+</LinearLayout>

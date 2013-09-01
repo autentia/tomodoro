@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <style name="CustomTheme" parent="android:style/Theme.Holo.Light">
+    	<item name="android:background">@drawable/gradient</item>
+        <item name="android:actionBarStyle">@style/noTitleBar</item>
+    </style>
+    
+    
+    <!--  Como hereda de no title bar a holo.light le quita la barra del titulo -->
+    <style name="noTitleBar" parent="@android:style/Theme.Light.NoTitleBar">
+    </style>
+    
+    <style name="noBackGround" parent="@android:style/Theme.Holo.Light">
+        <item name="android:background">@null</item>
+    </style>
+    
+    <style name="shadow" parent="@android:style/TextAppearance">
+	    <item name="android:shadowColor">#000000</item>
+	    <item name="android:shadowRadius">1.5</item>
+	    <item name="android:shadowDx">1.0</item>
+	    <item name="android:shadowDy">1.0</item>
+	</style>
+    
+	<style name="shadowNoBackGround" parent="@shadow">
+	    <item name="android:background">@null</item>
+	</style>
+	
+</resources>
