@@ -1,4 +1,6 @@
-package com.autentia.pomodoro;
+package com.autentia.tomodoro;
+
+import com.autentia.pomodoro.R;
 
 import android.app.Activity;
 import android.content.Intent;

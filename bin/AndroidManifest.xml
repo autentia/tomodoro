@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/CustomTheme" >
         <activity
-            android:name="com.autentia.pomodoro.MainActivity"
+            android:name="com.autentia.tomodoro.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.autentia.pomodoro.ChronoActivity"
+            android:name="com.autentia.tomodoro.ChronoActivity"
             android:label="@string/chrono"
             android:screenOrientation="portrait" >
             <intent-filter>

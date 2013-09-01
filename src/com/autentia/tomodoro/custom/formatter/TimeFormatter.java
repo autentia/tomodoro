@@ -1,4 +1,4 @@
-package com.autentia.custom.formatter;
+package com.autentia.tomodoro.custom.formatter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

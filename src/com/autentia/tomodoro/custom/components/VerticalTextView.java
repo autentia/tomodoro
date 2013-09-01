@@ -1,4 +1,4 @@
-package com.autentia.custom.components;
+package com.autentia.tomodoro.custom.components;
 
 import android.content.Context;
 import android.graphics.Canvas;

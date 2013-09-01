@@ -1,4 +1,4 @@
-package com.autentia.pomodoro;
+package com.autentia.tomodoro;
 
 import java.util.GregorianCalendar;
 
@@ -20,7 +20,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.autentia.custom.formatter.TimeFormatter;
+import com.autentia.pomodoro.R;
+import com.autentia.tomodoro.custom.formatter.TimeFormatter;
 
 public class ChronoActivity extends Activity{
 
