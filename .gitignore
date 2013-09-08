@@ -16,6 +16,8 @@ libs/android-support-v4.jar
 
 # generated files
 bin/
+bin\
+gen\
 gen/
 
 # Local configuration file (sdk path, etc)

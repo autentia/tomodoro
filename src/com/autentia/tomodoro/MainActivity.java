@@ -1,7 +1,5 @@
 package com.autentia.tomodoro;
 
-import com.autentia.pomodoro.R;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -56,6 +54,7 @@ public class MainActivity extends Activity {
 	}
 
 	private void initNumberPickers() {
+		
 		numberPicker1 = (NumberPicker) findViewById(R.id.minutePicker1);
 		numberPicker2 = (NumberPicker) findViewById(R.id.minutePicker2);
 		configureNumberPicker(numberPicker1);

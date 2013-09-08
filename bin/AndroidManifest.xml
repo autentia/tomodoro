@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.autentia.pomodoro"
+    package="com.autentia.tomodoro"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -12,7 +12,8 @@
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:theme="@style/CustomTheme" >
+        android:theme="@style/CustomTheme"
+        >
         <activity
             android:name="com.autentia.tomodoro.MainActivity"
             android:label="@string/app_name"
@@ -25,12 +26,15 @@
         <activity
             android:name="com.autentia.tomodoro.ChronoActivity"
             android:label="@string/chrono"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:alwaysRetainTaskState="true" >
             <intent-filter>
 				<action android:name="com.autentia.CHRONO_ACTIVATED"/>  
         		<category android:name="android.intent.category.DEFAULT"/>  
             </intent-filter>
         </activity>
+        <service android:name=".services.CountDownService" android:exported="false">
+        </service>
     </application>
 
 </manifest>

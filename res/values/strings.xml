@@ -11,5 +11,6 @@
     <string name="chrono">Cronómetro</string>
     <string name="greetings">¡Enhorabuena!</string>
     <string name="finished">Tomodoro terminado</string>
+    <string name="canceled">Tomodoro cancelado ¬¬</string>
     
 </resources>

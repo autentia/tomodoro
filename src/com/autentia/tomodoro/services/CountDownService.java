@@ -1,0 +1,112 @@
+package com.autentia.tomodoro.services;
+
+import java.util.GregorianCalendar;
+
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.Service;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
+import android.os.CountDownTimer;
+import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
+
+import com.autentia.tomodoro.IntentExtraConstant;
+import com.autentia.tomodoro.MainActivity;
+import com.autentia.tomodoro.R;
+import com.autentia.tomodoro.custom.formatter.TimeFormatter;
+
+public class CountDownService extends Service {
+	
+	public final static String END_TIME = "00:00";
+	
+	private int minutes;
+	
+	private CountDownTimer timer;
+	
+	private final TimeFormatter timeFormatter = new TimeFormatter();
+	
+	
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		
+		minutes = intent.getIntExtra(IntentExtraConstant.ChronoActivityExtraNames.MINUTES, 0);
+		doTimer();
+		return START_STICKY;
+	}
+	
+	private void doTimer() {
+		
+		final GregorianCalendar gc = new GregorianCalendar(0, 0, 0, 0, minutes, 0);
+		final long totalMilisecondsCounting = calculateTimeInMiliseconds(minutes);
+		timer = new CountDownTimer(totalMilisecondsCounting, 1000) {
+			
+			public void onTick(long millisUntilFinished) {
+				
+				gc.setTimeInMillis(gc.getTimeInMillis() - 1000);
+				sendBroadcastTime(timeFormatter.toString(gc.getTime()));
+			}
+
+			private void sendBroadcastTime(final String timeFormatted) {
+				
+				final Intent intent = new Intent("ACTION_TIME_CHANGED");
+				intent.putExtra("time", timeFormatted);
+				getApplication().sendBroadcast(intent);
+			}
+		 
+			@Override
+			public void onFinish() {
+				
+				sendBroadcastTime("00:00");
+				sendNotification();
+				reproduceSound();
+				stopSelf();
+			}
+		};
+		
+		timer.start();
+	}
+	
+	@Override
+	public void onDestroy() {
+		
+		super.onDestroy();
+		timer.cancel();
+	}
+	
+	private long calculateTimeInMiliseconds(int minutes) {
+		
+		return minutes * 60000;
+	}
+	
+	private void reproduceSound() {
+		
+		final MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.trill);
+		mediaPlayer.start();
+	}
+	
+	private void sendNotification() {
+		
+		final Bitmap lageIcon = BitmapFactory.decodeResource(getResources(), R.drawable.tomate);
+		final Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
+		final PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, resultIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+		final NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext())
+		.setContentTitle(getText(R.string.greetings))
+		.setContentText(getText(R.string.finished))
+		.setSmallIcon(R.drawable.notificationiconsmall)
+		.setLargeIcon(lageIcon)
+		.setContentIntent(pendingIntent)
+		.setAutoCancel(true);
+		final NotificationManager notificationManager =
+			    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		notificationManager.notify(1, notificationBuilder.build());
+	}
+
+	@Override
+	public IBinder onBind(Intent intent) {
+		return null;
+	}
+}
