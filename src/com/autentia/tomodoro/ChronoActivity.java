@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.autentia.tomodoro.custom.formatter.TimeFormatter;
 import com.autentia.tomodoro.services.CountDownService;
 
 public class ChronoActivity extends Activity{
@@ -31,11 +32,11 @@ public class ChronoActivity extends Activity{
         @Override  
         public void onReceive(Context context, Intent intent) {  
               
-            if ( intent.getAction().equals("ACTION_TIME_CHANGED") ) {
+            if ( intent.getAction().equals(CommonNames.ChronoActivityNames.BROADCAST_TIME_INTENT_NAME) ) {
             	final String time;
-                if (intent.hasExtra("time")) {
-                	time = intent.getExtras().getString("time");
-                	if ("00:00".equals(time)) {
+                if (intent.hasExtra(CommonNames.ChronoActivityNames.TIME_EXTRA)) {
+                	time = intent.getExtras().getString(CommonNames.ChronoActivityNames.TIME_EXTRA);
+                	if (TimeFormatter.FINAL_HOUR.equals(time)) {
                 		endCountDownActions();
                 	}	
                 	chronoText.setText(time);
@@ -65,7 +66,7 @@ public class ChronoActivity extends Activity{
 		chronoText = (TextView) findViewById(R.id.chronoText);
 		setCustomFonts();
 		serviceIntent = new Intent(this, CountDownService.class);
-		serviceIntent.putExtra(IntentExtraConstant.ChronoActivityExtraNames.MINUTES, minutes1*10 + minutes2);
+		serviceIntent.putExtra(CommonNames.ChronoActivityNames.MINUTES_EXTRA, minutes1*10 + minutes2);
 		startService(serviceIntent);
 	}
 	
@@ -81,8 +82,8 @@ public class ChronoActivity extends Activity{
 	@Override
 	protected void onPause() {
 		
-		unregisterReceiver(simpleReceiver);
 		super.onPause();
+		unregisterReceiver(simpleReceiver);
 	}
 	
 	private void endCountDownActions() {

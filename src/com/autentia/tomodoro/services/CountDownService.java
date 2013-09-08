@@ -14,14 +14,12 @@ import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 
-import com.autentia.tomodoro.IntentExtraConstant;
+import com.autentia.tomodoro.CommonNames;
 import com.autentia.tomodoro.MainActivity;
 import com.autentia.tomodoro.R;
 import com.autentia.tomodoro.custom.formatter.TimeFormatter;
 
 public class CountDownService extends Service {
-	
-	public final static String END_TIME = "00:00";
 	
 	private int minutes;
 	
@@ -33,7 +31,7 @@ public class CountDownService extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		
-		minutes = intent.getIntExtra(IntentExtraConstant.ChronoActivityExtraNames.MINUTES, 0);
+		minutes = intent.getIntExtra(CommonNames.ChronoActivityNames.MINUTES_EXTRA, 0);
 		doTimer();
 		return START_STICKY;
 	}
@@ -52,15 +50,15 @@ public class CountDownService extends Service {
 
 			private void sendBroadcastTime(final String timeFormatted) {
 				
-				final Intent intent = new Intent("ACTION_TIME_CHANGED");
-				intent.putExtra("time", timeFormatted);
+				final Intent intent = new Intent(CommonNames.ChronoActivityNames.BROADCAST_TIME_INTENT_NAME);
+				intent.putExtra(CommonNames.ChronoActivityNames.TIME_EXTRA, timeFormatted);
 				getApplication().sendBroadcast(intent);
 			}
 		 
 			@Override
 			public void onFinish() {
 				
-				sendBroadcastTime("00:00");
+				sendBroadcastTime(TimeFormatter.FINAL_HOUR);
 				sendNotification();
 				reproduceSound();
 				stopSelf();
