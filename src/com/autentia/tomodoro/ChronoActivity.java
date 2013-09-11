@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.autentia.tomodoro.custom.formatter.TimeFormatter;
-import com.autentia.tomodoro.services.CountDownService;
+import com.autentia.tomodoro.service.CountDownService;
 
 public class ChronoActivity extends Activity{
 
@@ -162,19 +162,16 @@ public class ChronoActivity extends Activity{
 		setBebasFontToComponent((TextView) findViewById(R.id.stopButton));
 	}
 	
-	//TODO abarranco: extraer a método comun setFontToComponent
 	private void setBebasFontToComponent(TextView textView) {
 		
-		final Typeface typeFace = Typeface.createFromAsset(getAssets(),
-		            "fonts/bebas.ttf");
-		textView.setTypeface(typeFace);
+		textView.setTypeface(Typeface.createFromAsset(getAssets(),
+	            "fonts/bebas.ttf"));
 	}
 	
 	private void setEightOneFontToComponent(TextView textView) {
 		
-		final Typeface typeFace = Typeface.createFromAsset(getAssets(),
-		            "fonts/eightone.ttf");
-		textView.setTypeface(typeFace);
+		textView.setTypeface(Typeface.createFromAsset(getAssets(),
+	            "fonts/eightone.ttf"));
 	}
 	
 	private void goToMainActivity() {

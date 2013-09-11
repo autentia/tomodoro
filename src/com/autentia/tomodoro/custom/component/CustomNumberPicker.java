@@ -1,4 +1,4 @@
-package com.autentia.tomodoro.custom.components;
+package com.autentia.tomodoro.custom.component;
 
 import android.content.Context;
 import android.graphics.Color;

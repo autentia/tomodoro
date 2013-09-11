@@ -1,4 +1,4 @@
-package com.autentia.tomodoro.services;
+package com.autentia.tomodoro.service;
 
 import java.util.GregorianCalendar;
 
