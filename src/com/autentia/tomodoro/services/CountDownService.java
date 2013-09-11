@@ -27,12 +27,15 @@ public class CountDownService extends Service {
 	
 	private final TimeFormatter timeFormatter = new TimeFormatter();
 	
+	public static boolean running = false;
+	
 	
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		
 		minutes = intent.getIntExtra(CommonNames.ChronoActivityNames.MINUTES_EXTRA, 0);
 		doTimer();
+		running = true;
 		return START_STICKY;
 	}
 	
@@ -73,6 +76,7 @@ public class CountDownService extends Service {
 		
 		super.onDestroy();
 		timer.cancel();
+		running = false;
 	}
 	
 	private long calculateTimeInMiliseconds(int minutes) {
@@ -97,7 +101,8 @@ public class CountDownService extends Service {
 		.setSmallIcon(R.drawable.notificationiconsmall)
 		.setLargeIcon(lageIcon)
 		.setContentIntent(pendingIntent)
-		.setAutoCancel(true);
+		.setAutoCancel(true)
+		.setNumber(1);
 		final NotificationManager notificationManager =
 			    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		notificationManager.notify(1, notificationBuilder.build());

@@ -12,5 +12,6 @@
     <string name="greetings">¡Enhorabuena!</string>
     <string name="finished">Tomodoro terminado</string>
     <string name="canceled">Tomodoro cancelado ¬¬</string>
+    <string name="minim">Tiempo mínimo 1 minuto !</string>
     
 </resources>

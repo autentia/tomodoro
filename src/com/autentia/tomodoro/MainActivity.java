@@ -1,6 +1,8 @@
 package com.autentia.tomodoro;
 
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
@@ -11,6 +13,9 @@ import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.NumberPicker.OnScrollListener;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.autentia.tomodoro.services.CountDownService;
 
 public class MainActivity extends Activity {
 	
@@ -22,8 +27,12 @@ public class MainActivity extends Activity {
     	
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (CountDownService.running) {
+        	startChronoActivity(0,0);
+        }
         init();
     }
+    
     
 	private void init() {
 		
@@ -84,15 +93,29 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				
-				final Intent startIntent = new Intent("com.autentia.CHRONO_ACTIVATED");
-				startIntent.putExtra("minutes1", numberPicker1.getValue());
-				startIntent.putExtra("minutes2", numberPicker2.getValue());
 				mediaPlayer.start();
-			    startActivity(startIntent); 
+				final int minutes1 = numberPicker1.getValue();
+				final int minutes2 = numberPicker2.getValue();
+				if (minutes1 == 0 && minutes2 == 0) {
+					Toast.makeText(getApplicationContext(), R.string.minim, Toast.LENGTH_SHORT).show();
+					return;
+				}
+				startChronoActivity(minutes1, minutes2); 
 			}
+
 		};
 		final Button startButton = (Button) findViewById(R.id.startButton);
 		startButton.setOnClickListener(startButtonClickListener);
+	}
+	
+	private void startChronoActivity(final int minutes1, final int minutes2) {
+		
+		final Intent startIntent = new Intent("com.autentia.CHRONO_ACTIVATED");
+		startIntent.putExtra("minutes1", minutes1);
+		startIntent.putExtra("minutes2", minutes2);
+	    startActivity(startIntent);
+        final NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(1);
 	}
 	
 	@Override

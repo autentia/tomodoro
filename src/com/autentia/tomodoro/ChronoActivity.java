@@ -25,10 +25,11 @@ public class ChronoActivity extends Activity{
 	private int minutes2 = 0;
 	private TextView chronoText;
 	Intent serviceIntent;
+	private boolean firstView = true;
+	
 	
 	private BroadcastReceiver simpleReceiver = new BroadcastReceiver() {  
         
-		//TODO abarranco: enterarse donde es mejor guardar los atributos de los intent para centralizarlos (time x ejemplo)
         @Override  
         public void onReceive(Context context, Intent intent) {  
               
@@ -59,8 +60,26 @@ public class ChronoActivity extends Activity{
         	minutes2 = intent.getExtras().getInt("minutes2");
         }
         initChrono();
+        initializeStopButton();
     }
 	 
+	private void initializeStopButton() {
+		
+		final View.OnClickListener stopButtonClickListener = new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				stopTomodoro();
+				goToMainActivity();
+			}
+
+		};
+		final Button stopButton = (Button) findViewById(R.id.stopButton);
+		stopButton.setOnClickListener(stopButtonClickListener);
+		
+	}
+
 	private void initChrono() {
 		
 		chronoText = (TextView) findViewById(R.id.chronoText);
@@ -74,6 +93,10 @@ public class ChronoActivity extends Activity{
 	protected void onResume() {
 		
 		super.onResume();
+		if (!CountDownService.running && !firstView) {
+			endCountDownActions();
+		}
+		firstView = false;
 		final IntentFilter intentFilter = new IntentFilter();  
         intentFilter.addAction("ACTION_TIME_CHANGED");  
         registerReceiver(simpleReceiver, intentFilter);
@@ -97,6 +120,7 @@ public class ChronoActivity extends Activity{
 		
 		chronoText.setTextSize(100);
 		chronoText.setTextColor(Color.parseColor("#451405"));
+		chronoText.setText(TimeFormatter.FINAL_HOUR);
 	}
 	
 	private void changeBackButtonBehavior() {
@@ -113,7 +137,16 @@ public class ChronoActivity extends Activity{
 	
 	private void changeBackButtonSound(Button backButton) {
 		
-		//TODO: abarranco, añadir un onclicklistener el boton con el sonido de volver que no es uuuuuu
+		final View.OnClickListener startButtonClickListener = new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				goToMainActivity();
+			}
+
+		};
+		backButton.setOnClickListener(startButtonClickListener);
 	}
 	
 	private void changeTomatoePic() {
@@ -144,10 +177,9 @@ public class ChronoActivity extends Activity{
 		textView.setTypeface(typeFace);
 	}
 	
-	public void backToMain(View view) {
+	private void goToMainActivity() {
 		
 		final Intent intent = new Intent(this, MainActivity.class);
-		stopTomodoro();
 		startActivity(intent);
 	}
 
@@ -160,6 +192,7 @@ public class ChronoActivity extends Activity{
 	
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		
 	    if (keyCode == KeyEvent.KEYCODE_BACK) {
 	    	stopTomodoro();
 			Toast.makeText(getApplicationContext(), R.string.canceled, Toast.LENGTH_SHORT).show();

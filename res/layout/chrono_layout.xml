@@ -74,6 +74,6 @@
         android:text="@string/stop_button"
         android:textColor="#f0bbb3"
         android:textSize="40sp"
-        android:onClick="backToMain" />
+        />
 
 </LinearLayout>
