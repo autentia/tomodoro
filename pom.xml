@@ -57,9 +57,9 @@
 									<includes>
 										<include>${project.build.directory}/${project.artifactId}.apk</include>
 									</includes>
-									<keystore>${project.basedir}/keystore-test</keystore>
+									<keystore>${project.basedir}/autentia-tomodoro</keystore>
 									<alias>autentia</alias>
-									<storepass>autentia</storepass>
+									<storepass>${password}</storepass>
 									<verbose>true</verbose>
 									<arguments>
 										<argument>-sigalg</argument>
@@ -212,7 +212,7 @@
 				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
 				<artifactId>android-maven-plugin</artifactId>
 				<!--  Si se actualiza la versión de ADT usar la versión 3.6.0 en adelante -->
-				<version>3.6.0</version>
+				<version>3.8.0</version>
 <!-- 				<version>3.5.0</version> -->
 				<configuration>
 					<androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
